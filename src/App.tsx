@@ -44,14 +44,14 @@ function Inner(props: { countFormParent: number, from: 'activity' | 'display' })
   const [count, setCount] = useState(0);
 
   React.useEffect(() => {
-    console.log("mount Inner");
+    console.log("mount Inner from " + props.from);
     return () => {
-      console.log("unmount Inner");
+      console.log("unmount Inner from " + props.from);
     };
   }, []);
 
   React.useMemo(() => {
-    console.log("memo Inner");
+    console.log("memo Inner from " + props.from);
   }, []);
 
   React.useEffect(() => {
@@ -61,9 +61,10 @@ function Inner(props: { countFormParent: number, from: 'activity' | 'display' })
     return () => {
       clearInterval(timer);
     };
-  });
+  },[]);
 
   const add = React.useCallback(() => {
+    console.log("callback Inner from " + props.from);
     setCount((count) => count + 1);
   }, []);
   return (
